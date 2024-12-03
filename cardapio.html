@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/card.css">
+    <title>HamburDelicia</title>
+</head>
+<body>
+    <header>
+     <h1>HamburDelicia</h1>
+    </header>
+    <nav>
+        <a href="home.html">Inicio</a>
+        <a href="#">Sobre Nós</a>
+        <a href="#">Contato</a>
+    </nav>
+    <h2>Calculadora de Compras</h1>
+    <div id="menu">
+        <div id="loc">
+            <button onclick="adicionarProduto('X-burguer R$20,00', 20,0)">X-burguer</button>
+            <br>
+            <button onclick="adicionarProduto('X-salada R$22,00', 22,0)">X-salada</button>
+            <br>
+            <button onclick="adicionarProduto('Artesanal da casa R$35,00', 35,0)">Artesanal da casa</button>
+        </div>
+    </div>
+    <h3>Itens selecionados:</h2>
+    <ul id="itensSelecionados"></ul>
+    <h2>Total:</h2>
+    <div id="total"></div>
+    <div id="loc">
+        <button onclick="limpar()" id="limpar">Limpar</button>
+        <br>
+        <button onclick="finalizarCompra()">Finalizar Compra</button>
+    </div>
+    <div class="banner">
+
+    </div>
+    
+    <script>
+        let itensSelecionados = [];
+        let total = 0;
+
+        function adicionarProduto(nome, preco) {
+            itensSelecionados.push(nome);
+            total += preco;
+
+            atualizarLista();
+        }
+
+        function atualizarLista() {
+            const listaItens = document.getElementById("itensSelecionados");
+            listaItens.innerHTML = "";
+            itensSelecionados.forEach(item => {
+                const li = document.createElement("li");
+                li.textContent = item;
+                listaItens.appendChild(li);
+            });
+
+            const totalElement = document.getElementById("total");
+            totalElement.textContent = "Total: R$" + total.toFixed(2);
+        }
+
+        function limpar() {
+            itensSelecionados = [];
+            total = 0;
+            atualizarLista();
+        }
+
+        function finalizarCompra() {
+            if (itensSelecionados.length === 0) {
+                alert("Por favor, selecione pelo menos um item para finalizar a compra.");
+            } else {
+                const mensagem = "Itens selecionados:\n" + itensSelecionados.join("\n") + "\n\nTotal: R$" + total.toFixed(2);
+                alert(mensagem);
+            }
+
+        }
+    </script>
+    <footer>
+        <p>&copy; 2024  HamburDelicia. Todos os direitos reservados.</p>
+    </footer>
+</body>
+</html>
